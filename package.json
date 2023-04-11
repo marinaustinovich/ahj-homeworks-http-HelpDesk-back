@@ -1,0 +1,27 @@
+{
+  "name": "helpdesk",
+  "version": "1.0.0",
+  "description": "the first and second tasts about work with http",
+  "main": "index.js",
+  "scripts": {
+    "prestart": "npm install",
+    "start": "nodemon server.js"
+  },
+  "engines": {
+    "node": "19.x"
+    },
+  "keywords": [
+    "http"
+  ],
+  "author": "Marin",
+  "license": "ISC",
+  "dependencies": {
+    "@koa/cors": "^4.0.0",
+    "koa": "^2.14.1",
+    "koa-body": "^6.0.1",
+    "koa-static": "^5.0.0"
+  },
+  "devDependencies": {
+    "dayjs": "^1.11.7"
+  }
+}
