@@ -110,7 +110,7 @@ app.use(async (request, response) => {
   }
 });
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 7070;
 const bootstrap = async () => {
   try {
     app.listen(port, () =>
