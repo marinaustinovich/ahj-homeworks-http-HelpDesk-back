@@ -1,66 +1,35 @@
-
 ### HelpDesk
 
 #### Легенда
 
-Пока backend-разработчик находится в отпуске, вам поручили сделать прототип API для сервиса управления заявками на помощь. Можете за себя порадоваться, так недалеко и до fullstack, к которому вам и нужно будет в дальнейшем прикрутить frontend.
+Backend-разработчик вернулся из отпуска, поэтому писать прототип API для сервиса управления заявками уже не нужно, оно готово.
 
 #### Описание
 
-Для хранения данных  будем оперировать следующими структурами:
+Описание API. Для хранения данных мы будем оперировать следующими структурами:
 ```javascript
 Ticket {
-    id // идентификатор, уникальный в пределах системы
+    id // идентификатор (уникальный в пределах системы)
     name // краткое описание
-    status // boolean — сделано или нет
-    created // дата создания (timestamp)
-}
-
-TicketFull {
-    id // идентификатор, уникальный в пределах системы
-    name // краткое описание
+    status // boolean - сделано или нет
     description // полное описание
-    status // boolean — сделано или нет
     created // дата создания (timestamp)
 }
 ```
 
-Напишите сервер с использованием koa, который работает по следующей схеме:
-* GET    ?method=allTickets           — список тикетов;
-* GET    ?method=ticketById&id=`<id>` — полное описание тикета, где `<id>` — идентификатор тикета;
-* POST   ?method=createTicket         — создание тикета — `<id>` генерируется на сервере, в теле формы `name`, `description`, `status`).
+Примеры запросов:
+* `GET    ?method=allTickets`           - список тикетов
+* `GET    ?method=ticketById&id=<id>` - полное описание тикета (где `<id>` - идентификатор тикета)
+* `POST   ?method=createTicket`         - создание тикета (`<id>` генерируется на сервере, в теле формы `name`, `description`, `status`)
 
 Соответственно:
-* GET    ?method=allTickets           — массив объектов типа `Ticket`, т. е. без `description`;
-* GET    ?method=ticketById&id=`<id>` — объект типа `TicketFull`, т. е. с `description`;
-* POST   ?method=createTicket         — в теле запроса форма с полями для объекта типа `Ticket`, с `id` = `null`.
+* `POST   ?method=createTicket`         - в теле запроса форма с полями для объекта типа `Ticket` (с `id` = `null`)
+* `POST   ?method=updateById&id=<id>` - в теле запроса форма с полями для обновления объекта типа `Ticket` по `id`
+* `GET    ?method=allTickets `          - массив объектов типа `Ticket` (т.е. без `description`)
+* `GET    ?method=ticketById&id=<id>` - объект типа `Ticket`
+* `GET    ?method=deleteById&id=<id>` - удалить объект типа `Ticket` по `id`, при успешном запросе статус ответа 204
 
-Сервер необходимо развернуть на Heroku. Автотесты писать не нужно.
-
-Не забывайте про CORS.
-
-Для упрощения тестирования можете при старте сервера добавлять туда несколько тикетов.
-
-Для того чтобы с сервера отдавать данные, достаточно в обработчиках koa написать:
-```js
-const tickets = [];
-
-app.use(async ctx => {
-    const { method } = ctx.request.query; // важно: в лекции опечатка, должно быть query
-
-    switch (method) {
-        case 'allTickets':
-            ctx.response.body = tickets;
-            return;
-        // TODO: обработка остальных методов
-        default:
-            ctx.response.status = 404;
-            return;
-    }
-});
-```
-
-Чтобы обработать полученный ответ во Frontend, достаточно этого кода:
+Код ниже позволит обработать полученный ответ от сервера во Frontend:
 ```js
 xhr.addEventListener('load', () => {
     if (xhr.status >= 200 && xhr.status < 300) {
@@ -72,9 +41,3 @@ xhr.addEventListener('load', () => {
     }
 });
 ```
-
-
-
-
-
-

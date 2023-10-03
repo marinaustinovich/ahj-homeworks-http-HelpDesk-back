@@ -1,27 +1,20 @@
 {
-  "name": "helpdesk",
+  "name": "helpdesk-backend",
   "version": "1.0.0",
-  "description": "the first and second tasts about work with http",
-  "main": "index.js",
+  "description": "",
+  "main": "server.js",
   "scripts": {
-    "prestart": "npm install",
-    "start": "nodemon server.js"
+    "start": "node server.js"
   },
-  "engines": {
-    "node": "19.x"
-    },
-  "keywords": [
-    "http"
-  ],
-  "author": "Marin",
+  "author": "Netology",
   "license": "ISC",
-  "dependencies": {
-    "@koa/cors": "^4.0.0",
-    "koa": "^2.14.1",
-    "koa-body": "^6.0.1",
-    "koa-static": "^5.0.0"
+  "engines": {
+    "node": ">=16.0.0 <19.0.0"
   },
-  "devDependencies": {
-    "dayjs": "^1.11.7"
+  "type": "module",
+  "dependencies": {
+    "body-parser": "1.20.2",
+    "cors": "2.8.5",
+    "express": "4.18.2"
   }
 }
