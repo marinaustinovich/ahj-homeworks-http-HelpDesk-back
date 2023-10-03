@@ -14,7 +14,7 @@ app.use(
   })
 );
 app.use((req, res, next) => {
-  res.setHeader('Content-Type', 'application/json');
+  res.setHeader("Content-Type", "application/json");
   next();
 });
 
@@ -44,6 +44,7 @@ let tickets = [
 
 app.use(async (request, response) => {
   const { method, id } = request.query;
+
   switch (method) {
     case "allTickets":
       response.send(JSON.stringify(tickets)).end();
@@ -110,11 +111,11 @@ app.use(async (request, response) => {
   }
 });
 
-const port = process.env.PORT || 7070;
+const port = process.env.PORT || 3000;
 const bootstrap = async () => {
   try {
     app.listen(port, () =>
-        console.log(`Server has been started on http://localhost:${port}`)
+      console.log(`Server has been started on http://localhost:${port}`)
     );
   } catch (error) {
     console.error(error);
